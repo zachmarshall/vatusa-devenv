@@ -1,0 +1,16 @@
+services:
+  rabbitmq:
+    hostname: "rabbitmq"
+    image: rabbitmq:3-management
+    ports:
+      - "15672"
+  taskrunner:
+    image: "taskrunner:latest"
+    environment:
+      RABBITMQ_HOST: "rabbitmq"
+      RABBITMQ_PORT: 5672
+      RABBITMQ_USERNAME: "guest"
+      RABBITMQ_PASSWORD: "guest"
+      RABBITMQ_QUEUE: "taskrunner"
+    links:
+      - rabbitmq
